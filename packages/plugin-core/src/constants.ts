@@ -302,7 +302,7 @@ export const DENDRON_MENUS = {
     },
     {
       // [[Command Enablement / When Clause Gotchas|dendron://dendron.docs/pkg.plugin-core.t.commands.ops#command-enablement--when-clause-gotchas]]
-      when: "resourceExtname == .md && dendron:pluginActive || resourceExtname == .yml && dendron:pluginActive && shellExecutionSupported",
+      when: "resourceExtname == .md && dendron:pluginActive && shellExecutionSupported || resourceExtname == .yml && dendron:pluginActive && shellExecutionSupported",
       command: "dendron.delete",
       group: "2_workspace",
     },
@@ -343,11 +343,11 @@ export const DENDRON_MENUS = {
   "view/item/context": [
     {
       command: "dendron.delete",
-      when: "view == dendron.treeView && viewItem == note",
+      when: "view == dendron.treeView && viewItem == note && shellExecutionSupported",
     },
     {
       command: "dendron.createNote",
-      when: "view == dendron.treeView",
+      when: "view == dendron.treeView && shellExecutionSupported",
     },
   ],
 };
