@@ -19,6 +19,8 @@ import {
   DeleteNoteResp,
   DeleteSchemaResp,
   DEngineInitResp,
+  FindNoteOpts,
+  FindNotesResp,
   GetDecorationsResp,
   GetNoteBlocksResp,
   GetSchemaResp,
@@ -365,6 +367,14 @@ export class DendronAPI extends API {
   engineWrite(req: EngineWriteRequest): Promise<WriteNoteResp> {
     return this._makeRequest({
       path: "note/write",
+      method: "post",
+      body: req,
+    });
+  }
+
+  noteFind(req: APIRequest<FindNoteOpts>): Promise<RespV3<FindNotesResp>> {
+    return this._makeRequest({
+      path: "note/find",
       method: "post",
       body: req,
     });
