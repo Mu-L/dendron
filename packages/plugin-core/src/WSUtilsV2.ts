@@ -6,6 +6,7 @@ import {
   DNoteAnchorBasic,
   DVault,
   NoteProps,
+  NotePropsMeta,
   NoteUtils,
   RespV3,
   VaultUtils,
@@ -259,7 +260,7 @@ export class WSUtilsV2 implements IWSUtilsV2 {
     return editor as vscode.TextEditor;
   }
 
-  async openNote(note: NoteProps) {
+  async openNote(note: NotePropsMeta) {
     const { vault, fname } = note;
     const fnameWithExtension = `${fname}.md`;
     return this.openFileInEditorUsingFullFname(vault, fnameWithExtension);

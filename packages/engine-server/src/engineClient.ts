@@ -39,7 +39,6 @@ import {
   WriteNoteResp,
   FindNoteOpts,
   NotePropsMeta,
-  RespV3,
   ERROR_STATUS,
   EngineEventEmitter,
   NoteIndexProps,
@@ -48,6 +47,8 @@ import {
   RenameNoteResp,
   GetSchemaResp,
   WriteSchemaResp,
+  GetNoteMetaResp,
+  GetNoteResp,
 } from "@dendronhq/common-all";
 import { createLogger, DConfig, DLogger } from "@dendronhq/common-server";
 import fs from "fs-extra";
@@ -197,7 +198,7 @@ export class DendronEngineClient implements DEngineClient, EngineEventEmitter {
   /**
    * See {@link DStore.getNote}
    */
-  async getNote(id: string): Promise<RespV3<NoteProps>> {
+  async getNote(id: string): Promise<GetNoteResp> {
     const maybeNote = this.notes[id];
 
     if (maybeNote) {
@@ -211,6 +212,10 @@ export class DendronEngineClient implements DEngineClient, EngineEventEmitter {
         }),
       };
     }
+  }
+
+  async getNoteMeta(id: string): Promise<GetNoteMetaResp> {
+    return this.getNote(id);
   }
 
   /**

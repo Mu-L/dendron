@@ -3,6 +3,7 @@ import {
   DNoteAnchorBasic,
   DVault,
   NoteProps,
+  NotePropsMeta,
   RespV3,
 } from "@dendronhq/common-all";
 
@@ -34,7 +35,7 @@ export interface IWSUtilsV2 {
     fnameWithExtension: string
   ): Promise<vscode.TextEditor>;
 
-  openNote(note: NoteProps): Promise<vscode.TextEditor>;
+  openNote(note: NotePropsMeta): Promise<vscode.TextEditor>;
 
   /**
    * Given list of notes, prompt user to pick note by selecting corresponding vault name
