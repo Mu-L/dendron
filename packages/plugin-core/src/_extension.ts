@@ -1,6 +1,9 @@
+import "reflect-metadata"; // This needs to be the topmost import for tsyringe to work
+
 import {
   CONSTANTS,
   DWorkspaceV2,
+  EngineEventEmitter,
   getStage,
   GraphEvents,
   GraphThemeEnum,
@@ -71,6 +74,9 @@ import { DendronExtension, getDWorkspace, getExtension } from "./workspace";
 import { TutorialInitializer } from "./workspace/tutorialInitializer";
 import { WorkspaceActivator } from "./workspace/workspaceActivator";
 import { WSUtils } from "./WSUtils";
+import { container } from "tsyringe";
+import { ITreeViewConfig } from "./common/ITreeViewConfig";
+import { TreeViewDummyConfig } from "./common/TreeViewDummyConfig";
 
 const MARKDOWN_WORD_PATTERN = new RegExp("([\\w\\.\\#]+)");
 // === Main
@@ -291,6 +297,16 @@ export async function _activate(
       }
       const wsImpl: DWorkspaceV2 = resp.data.workspace;
 
+      // setup extension container
+      container.register<EngineEventEmitter>("EngineEventEmitter", {
+        useToken: "ReducedDEngine",
+      });
+      container.register("wsRoot", { useValue: vscode.Uri.file(maybeWsRoot) });
+      container.register("ReducedDEngine", { useValue: resp.data.engine });
+      container.register("vaults", { useValue: wsImpl.vaults });
+      container.register<ITreeViewConfig>("ITreeViewConfig", {
+        useClass: TreeViewDummyConfig,
+      });
       // initialize Segment client
       AnalyticsUtils.setupSegmentWithCacheFlush({ context, ws: wsImpl });
 
