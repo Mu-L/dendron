@@ -1830,7 +1830,7 @@ suite("NativeTreeView tests", function () {
       });
     });
 
-    describe("error handling", function () {
+    describe.skip("error handling", function () {
       describeMultiWS(
         "GIVEN note id that is not in noteDict",
         {
