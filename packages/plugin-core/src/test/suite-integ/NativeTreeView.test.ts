@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { DendronError, NoteProps, TreeUtils } from "@dendronhq/common-all";
 import { vault2Path } from "@dendronhq/common-server";
 import { NoteTestUtilsV4 } from "@dendronhq/common-test-utils";
